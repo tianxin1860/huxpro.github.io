@@ -10,6 +10,7 @@ tags:
     - OS
     - Unix
     - Linux
+    - NLP
 ---
 
 > This document is not completed and will be updated anytime.
