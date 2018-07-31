@@ -30,22 +30,45 @@ tags:
 如果你不想阅读整篇文章，这里为你准备了一个总结：
 
 ### 前导知识与背景
+短文本匹配有2大类解决方案，分别为:Presentation based Method和Interaction based Methods
 
-###### 基于表示学习的方法(Presentation based Method)
+###### Presentation based Methods
 
-这类方法的思路都是用各种CNN、RNN先去生成文本的特征表示(feature vector), 然后通过计算2个特征向量的相似度来度量文本的匹配度，这一类方法的区别就在于如何去计算文本的特征表示以及如何去度量特征向量的相似度。
+这类方法的思路都是用各种CNN、RNN等模型先去生成文本的特征表示(feature vector), 然后通过计算2个特征向量的相似度来度量文本的匹配度，这一类方法的区别就在于如何去计算文本的特征表示以及如何去度量特征向量的相似度。
 
 ###### Interaction based Methods
 
-这类方法基于1个假设: **两个句子的全局匹配度是由局部匹配度经过融合得到的。**  
-主体思想: 先计算两个句子的局部匹配度，然后再去学习合适函数关系将局部匹配度融合起来作为最终的匹配度；
+**基本假设** :两个句子的全局匹配度是由局部匹配度经过融合得到的;  
+**主体思想** :先计算两个句子的局部匹配度，然后再去学习合适函数关系将局部匹配度融合起来作为最终的匹配度;  
+**实现思路** :这类方法的思路是先去求文本对的匹配矩阵，然后利用各种模型从匹配矩阵中学习出有意义的特征，进行最终的相似度计算;  
+**优点** :(相对于Presentation based Methods)
+1. 更直接的表示局部匹配的关系
+2. 保留了更多的结构信息(匹配的位置信息)；
+
+**缺点** :
+1. 将word或者n-gram word作为特征的基本单元，没有考虑到自然语言的其它特征:例如句子的句法信息；
+2. 很难建模global matching和local matching的关系；
+3. 对于文本多角度的匹配特征缺乏统一的融合框架，使得增加新的匹配特征简单便捷；
 
 ### Mix Model
+**主体思路**
+1.  
+2.
+3. 
 
 ###### Mix Model想要解决什么问题？
+再来具体化以前Interaction based Methods的缺点:
 
-**仅仅从单个粒度去考量句子的匹配度是有明显缺陷的**
+1. **仅仅从word embedding特征去计算local matching是有明显缺陷的, 对于短语来说会有明显的信息损失**
+(例如: all in与in all, work hard与hard work)
+2. 假设局部匹配的特征重要度相同，实际情况并不是这样，例如:两个句子中的关键词匹配特征明显比两个句子中常用词的匹配度特征更重要；
+3. 
 
+**Mix model如何解决上述问题**
+1. 对句子进行多粒度切分，多粒度交叉计算local matching，尽可能少的信息损失；  
+2. 通过引入attention mechanism对局部匹配特征对于全局匹配度的重要性加以描述； 
+3. 
+###### Local Matching
 
 ###### Local Matching and global matching
 核心思想:
@@ -141,7 +164,7 @@ Slide Over 支持的 App 并不多，不过 Safari 名列其中，这意味着�
 
 下图向你展示了 iOS 9 所有可能的 viewport 尺寸，检查检查你的响应式断点都包含它们了吗？
 
-![iOS 9 RWD](http://www.mobilexweb.com/wp-content/uploads/2015/09/ios9rwd.png)
+![iOS 9RWD](http://www.mobilexweb.com/wp-content/uploads/2015/09/ios9rwd.png)
 
 ##### Safari View Controller 
 
@@ -298,28 +321,6 @@ if (CSS.supports("-webkit-scroll-snap-type", "mandatory")) {}
 <img src="http://www.mobilexweb.com/wp-content/uploads/2015/09/IMG_2017.png" alt="input file" width="320" />
 
 * 当你加载一个 HTTPS 协议的页面时，你不能混用 HTTP 与 HTTPS 的资源
-
-
-### Bugs
-
-Bug 通常都要在几周之后才会显露出来，我也会持续跟进并更新这篇文章。目前为止，我的发现如下：
-
-* 对于 Home Screen webapps（添加至主屏的 web 应用），`apple-mobile-web-app-status-bar-style` 这个 meta 标签不起作用了！所以你现在不能再像过去一样使用 `black-translucent` 让你的 webapp 渲染在状态栏的后面了。（iOS 9.2 fixed 了这个 bug）
-* Speech Synthesis API （语音综合 API）不再工作了
-
-
-### 仍在等待……
-
-当 Mac 上的 Safari、桌面电脑与 Android 上的 Chrome 都已经为网站支持 Push Notification （通知推送）时，iOS 上的 Safari 仍然不支持这个特性。就 API 而言，我们仍然没有：WebRTC、getUserMedia、Service Worker、FileSystem API、Network Information API、Battery Status API、Vibration API 等等……你又在 iOS 上等待哪些特性呢？ 
-
-### watchOS 与 tvOS
-
-新发布的 watchOS 2.0 与 tvOS 9.0 都是基于 iOS 的操作系统，它们针对特定的设备发行（Apple Watch 与新的 Apple TV）。从用户的角度来说，那里并没有浏览器了。从开发者的角度，那里也没有 Webview 了。
-
-尽管有不少人抱怨（大部分都是针对 webview 的缺失），我并不能确定这是不是个坏主意。我猜测 Apple 会尝试通过 Siri 来将 “web” 带给 TV、手表、甚至 CarPlay 的用户。所以，如果你遵循了上述的 “App Search” 的步骤，你的内容将可能通过 Siri 在这些设备上以 widget（小部件）或者快捷回复的形式变得可以访问。
-
-对于 Apple TV ，它支持使用 JavaScript、DOM API 与 XMLHttpRequest 来让我们构建某种类似 Client-Server webapp 的东西。没有 HTML 和 CSS，这是什么把戏？其实它支持的叫 TVML，是一种基于 XML、为那些可以被渲染在 TV 屏幕上的特定内容而优化后的标签。这些标签只可以在来自应用商店的 native app 中渲染，但是这些 TVML 是由服务器端来生成的。
-
 
 ### 著作权声明
 
