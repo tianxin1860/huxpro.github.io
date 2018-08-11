@@ -2,16 +2,16 @@
 
 Hi，我是田鑫，爱好NLP、Machine Learning、Data Mining，时常出没在[知乎](https://www.zhihu.com/people/tian-xin-54-47/posts)、[Github](https://github.com/tianxin1860)
 
-职业是算法工程师，目前在 [百度](https://www.baidu.com/) 做网页相关数据挖掘。
+目前在 [百度](https://www.baidu.com/) 做网页相关数据挖掘。
 
 一些作品和开源软件项目，👉 戳 [Portfolio](/portfolio)、[Github](http://github.com/huxpro)。 
 
 
-##### 相关经历
+##### 个人经历
 
-- 百度feed流**用户停留时长预估**大赛第6名（6/141）
-- [Service Worker 101][5] · GDG DevFest 北京 2016
-- [Progressive Web App，复兴序章][4] · [QCon 上海 2016](http://2016.qconshanghai.com/presentation/3111)
+- 百度feed流用户停留时长预估大赛第6名(6/141), 2018.07
+- 2014.08——2017.06 中山大学(研究方向:NLP)
+- 2010.09——2014.06 武汉大学(本科) 
 
 [1]: //huangxuan.me/2015/07/09/js-module-7day/
 [2]: //huangxuan.me/2015/12/28/css-sucks-2015/
