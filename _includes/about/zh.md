@@ -2,11 +2,10 @@
 
 Hi，我是田鑫，爱好NLP、Machine Learning、Data Mining，时常出没在[知乎](https://www.zhihu.com/people/tian-xin-54-47/posts)、[Github](https://github.com/tianxin1860)
 
-目前在 [百度](https://www.baidu.com/) 做网页相关数据挖掘。
+目前在 [百度](https://www.baidu.com/) 做网页相关数据挖掘
 
 ##### 个人经历
 
-- 百度feed流用户停留时长预估大赛第6名(6/141), 2018.07
 - 百度feed流用户停留时长预估大赛第6名(6/141), 2018.07
 - 2014.08——2017.06 中山大学(研究方向:NLP)
 - 2010.09——2014.06 武汉大学(本科) 

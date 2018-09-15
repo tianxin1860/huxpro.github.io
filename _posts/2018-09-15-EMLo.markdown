@@ -28,6 +28,9 @@ tags:
 1. 神经网络不同层的hidden state表达了不同层次的信息，基于不同层次的hidden state去计算特征比仅基于top layer的hidden state计算特征有更强的表达能力，可以捕捉更多有效信息。
 2. 神经网络不同层次的特征对不同nlp任务的影响不一样。
 
+### 工程实践
+[待实践后再补充]
+
 ### 疑问与思考
 1. 2-layer bi-LM多层hidden state的权重参数是如何通过softmax学习？  
 答: 个人猜想:引入softmax层，所有单词共享softmax参数，从而通过学习softmax参数可以计算出线性组合的权重。
