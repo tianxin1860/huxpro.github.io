@@ -1,0 +1,38 @@
+---
+layout:       post
+title:        "Deep contextualized word representations"
+subtitle:     "论文阅读笔记"
+date:         2018-09-15 20:00:00
+author:       "田鑫"
+header-img:   "img/in-post/post-eleme-pwa/eleme-at-io.jpg"
+header-mask:  0.3
+catalog:      true
+multilingual: false
+tags:
+    - NLP
+    - Word Embedding 
+---
+
+### 背景
+&emsp;&emsp;Word Embedding几乎是NLP在深度学习任务中的基础构成部分，[word2vec](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)和[glove](https://nlp.stanford.edu/pubs/glove.pdf)在很多场景下都有应用，但是word2vec和glove所学习到的word embedding有明显的缺陷:
+**每个word都学习到1个fixed的embedding， 无法解决polysemy(一词多义)问题**，而一词多义的多个意义是依赖于上下文的，所以本文尝试通过上下文去动态计算每个word的embedding，而不是学习1个固定的embedding。
+
+### ELMo(Embeddings from Language Models)
+&emsp;&emsp;一词多义问题中的**多义**本质上是由其上下文决定的，因此很自然的思路是将单词每个意义的embedding看做是context的函数，所以问题就转化为如何对context与embedding之间的函数关系建模？这是DL最擅长的事情了，理论上DL可以拟合任务复杂的函数关系。
+
+&emsp;&emsp;ELMo学习到的embedding是整个输入序列的函数。具体来说:ELMo是1个Two-layer biLMs每一层输出的hidden state的线性组合, 线性组合的系数是在具体的任务中学习得到的。
+
+本文的Two-layer biLM是预先通过无监督学习训练的基于LSTM的2层双向语言模型。
+
+### Why does ELMo work?
+1. 神经网络不同层的hidden state表达了不同层次的信息，基于不同层次的hidden state去计算特征比仅基于top layer的hidden state计算特征有更强的表达能力，可以捕捉更多有效信息。
+2. 神经网络不同层次的特征对不同nlp任务的影响不一样。
+
+### 疑问与思考
+1. 2-layer bi-LM多层hidden state的权重参数是如何通过softmax学习？  
+答: 个人猜想:引入softmax层，所有单词共享softmax参数，从而通过学习softmax参数可以计算出线性组合的权重。
+
+2. 训练ELMo时，参数γ是如何参与训练的？其初始值如何确定？ELMo和context-independent embedding拼接时，γ起什么作用？  
+答:
+
+3. 正则化参数如何设置？
